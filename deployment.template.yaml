@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  namespace: backend
+  labels:
+    app: user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+        - name: user
+          image: 211125364313.dkr.ecr.ap-southeast-1.amazonaws.com/user:__VERSION__
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: backend-logs
+              mountPath: /logs
+          resources:
+            requests:
+              cpu: "1000m"
+            limits:
+              cpu: "1000m"
+      volumes:
+        - name: backend-logs
+          nfs:
+            server: 192.168.98.150
+            path: /mnt/data/nfs/backend_logs
+      imagePullSecrets:
+        - name: ecr-secret
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user
+  namespace: backend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: hrm
+#spec:
+#  selector:
+#    app: hrm
+#  ports:
+#    - name: http
+#      protocol: TCP
+#      port: 8080
+#      targetPort: 8080
+#  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user
+  namespace: backend
+  labels:
+    app: user   # Phải trùng với ServiceMonitor
+spec:
+  ports:
+    - name: http   # Phải trùng với ServiceMonitor endpoints.port
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: user
+
+---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: node-port-app1
+#spec:
+#  selector:
+#    app: app1
+#  type: NodePort
+#  ports:
+#    - port: 8080
+#      targetPort: 8080
+#      nodePort: 30001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-kong-ingress
+  namespace: backend
+  annotations:
+    konghq.com/strip-path: "true"
+    konghq.com/proxy-body-size: "300m"
+    konghq.com/plugins: jwt-auth, txu-plugins    # Gắn plugin vào route
+spec:
+  ingressClassName: kong            # KIC sẽ quản lý Ingress được gắn ingress-class của mình, nếu được gắn thêm plugins của KIC thì KIC sẽ sync route này vào Kong (admin, proxy)
+  rules:
+    - host: backend.txuyen.com
+      http:
+        paths:
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: user
+                port:
+                  number: 8080
+---
+
+#apiVersion: monitoring.coreos.com/v1
+#kind: ServiceMonitor
+#metadata:
+#  name: hrm-service-monitor
+#  namespace: backend
+#  labels:
+#    release: monitoring
+#spec:
+#  selector:
+#    matchLabels:
+#      app: user
+#  endpoints:
+#    - port: http
+#      path: /actuator/prometheus
+#      interval: 15s
+#      scheme: http
+
+
