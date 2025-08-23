@@ -271,9 +271,7 @@ public class WeeklyReportService {
         List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
                 fromDate,
                 toDate,
-                department.getId());
-
-
+                2L);
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
