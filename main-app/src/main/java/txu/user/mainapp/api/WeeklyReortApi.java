@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WeeklyReortApi extends AbstractApi {
 
-
     private final WeeklyReportService weeklyReportService;
 
     @PostMapping("/create")
@@ -39,6 +38,5 @@ public class WeeklyReortApi extends AbstractApi {
     public List<WeeklyReportExtends> getSummaryReportFromTo(@RequestBody FromDateToDateRequest request){
         return weeklyReportService. getSummaryReportFromTo(request.getFrom(), request.getTo());
     }
-
 
 }

@@ -278,3 +278,8 @@
 2025-08-23 11:44:05.352 INFO  [RMI TCP Connection(2)-192.168.1.100] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-08-23 11:44:05.352 INFO  [RMI TCP Connection(2)-192.168.1.100] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-08-23 11:44:05.354 INFO  [RMI TCP Connection(2)-192.168.1.100] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-08-23 13:15:11.815 INFO  [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-23 13:15:11.907 INFO  [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-23 13:15:11.920 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-23 13:15:11.926 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-23 13:15:11.937 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
