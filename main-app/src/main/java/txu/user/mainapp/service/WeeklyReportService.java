@@ -102,7 +102,7 @@ public class WeeklyReportService {
                         .build()
         );
 
-        String fileUrl = String.format( url + "/%s/%s", bucketName, filename);
+        String fileUrl = String.format(url + "/%s/%s", bucketName, filename);
 
         // Save metadata
         DepartmentEntity department = null;
@@ -118,7 +118,6 @@ public class WeeklyReportService {
         weeklyReport.setUploadedAt(DateTime.now().toDate());
         return weeklyReportDao.save(weeklyReport);
     }
-
 
 
     public List<WeeklyReportExtends> getDepartmentFromTo(Date from, Date to) {
@@ -146,18 +145,34 @@ public class WeeklyReportService {
         assert department != null;
 
 
-        // TimeZone cho Việt Nam
+//        // Chuyển Date -> LocalDate theo Zone VN
+//        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+//        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+//
+//
+//        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
+//                Date.from(from_.atStartOfDay(zoneId).toInstant()),
+//                Date.from(to_.atStartOfDay(zoneId).toInstant()),
+//                department.getId());
+
+
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
         // Chuyển Date -> LocalDate theo Zone VN
         LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
         LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
 
+        // from = 00:00:00
+        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
+
+        // to = 23:59:59.999
+        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
         List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
-                Date.from(from_.atStartOfDay(zoneId).toInstant()),
-                Date.from(to_.atStartOfDay(zoneId).toInstant()),
+                fromDate,
+                toDate,
                 department.getId());
+
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
@@ -180,7 +195,7 @@ public class WeeklyReportService {
 //            System.out.println("Cuối tuần: " + endDate);
 
             // Lấy báo cáo của đơn vị tổng hợp trong tuần hiện tại mà báo cáo của đơn vị nghiệp vụ được chọn
-            WeeklyReportEntity rs = weeklyReportDao.getSingleByDepartmentIdFromTo(startDate, endDate,  2L);
+            WeeklyReportEntity rs = weeklyReportDao.getSingleByDepartmentIdFromTo(startDate, endDate, 2L);
 
             WeeklyReportExtends temp = new WeeklyReportExtends();
             temp.setId(weeklyReport.getId());
@@ -190,7 +205,7 @@ public class WeeklyReportService {
             temp.setDepartment(weeklyReport.getDepartment());
             temp.setUploadedAt(weeklyReport.getUploadedAt());
 
-            if(rs!=null) {
+            if (rs != null) {
                 temp.setOriginNameReportEx(rs.getOriginName());
                 temp.setDateReportEx(rs.getUploadedAt());
                 temp.setUrlReportEx(rs.getUrl());
@@ -228,17 +243,37 @@ public class WeeklyReportService {
         assert department != null;
 
 
-        // TimeZone cho Việt Nam
+//        // TimeZone cho Việt Nam
+//        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+//
+//        // Chuyển Date -> LocalDate theo Zone VN
+//        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+//        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+//
+//        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
+//                Date.from(from_.atStartOfDay(zoneId).toInstant()),
+//                Date.from(to_.atStartOfDay(zoneId).toInstant()),
+//                2L);
+
+
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
         // Chuyển Date -> LocalDate theo Zone VN
         LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
         LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
 
+        // from = 00:00:00
+        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
+
+        // to = 23:59:59.999
+        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
+
         List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
-                Date.from(from_.atStartOfDay(zoneId).toInstant()),
-                Date.from(to_.atStartOfDay(zoneId).toInstant()),
-                2L);
+                fromDate,
+                toDate,
+                department.getId());
+
+
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
@@ -257,7 +292,7 @@ public class WeeklyReportService {
             Date endDate = Date.from(endOfWeek.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
             // Lấy báo cáo của đơn vị nghiệp vụ trong tuần hiện tại mà báo cáo tổng hợp được chọn
-            WeeklyReportEntity rs = weeklyReportDao.getSingleByDepartmentIdFromTo(startDate, endDate,  department.getId());
+            WeeklyReportEntity rs = weeklyReportDao.getSingleByDepartmentIdFromTo(startDate, endDate, department.getId());
 
             WeeklyReportExtends temp = new WeeklyReportExtends();
             temp.setId(weeklyReport.getId());
@@ -267,7 +302,7 @@ public class WeeklyReportService {
             temp.setDepartment(weeklyReport.getDepartment());
             temp.setUploadedAt(weeklyReport.getUploadedAt());
 
-            if(rs!=null) {
+            if (rs != null) {
                 temp.setOriginNameReportEx(rs.getOriginName());
                 temp.setDateReportEx(rs.getUploadedAt());
                 temp.setUrlReportEx(rs.getUrl());
