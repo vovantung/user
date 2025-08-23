@@ -1,0 +1,45 @@
+2025-08-23 00:02:50.030 WARN  [http-nio-8082-exec-6] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 07:15:44.224 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6h33m34s717ms810µs300ns).
+2025-08-23 08:01:44.753 WARN  [http-nio-8082-exec-6] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 08:01:44.753 WARN  [http-nio-8082-exec-8] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 08:01:46.924 WARN  [http-nio-8082-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 08:01:46.924 WARN  [http-nio-8082-exec-7] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 08:47:35.453 WARN  [http-nio-8082-exec-9] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 08:53:39.993 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 08:53:41.701 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 08:58:52.576 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 08:58:53.961 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 09:02:00.885 WARN  [http-nio-8082-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 09:02:00.886 WARN  [http-nio-8082-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 09:02:05.869 WARN  [http-nio-8082-exec-6] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 09:02:05.869 WARN  [http-nio-8082-exec-5] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 09:56:45.934 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 09:56:47.562 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 10:04:31.085 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m14s421ms322µs800ns).
+2025-08-23 10:04:31.096 WARN  [http-nio-8082-exec-5] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:31.096 WARN  [http-nio-8082-exec-6] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:31.096 WARN  [http-nio-8082-exec-7] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:31.096 WARN  [http-nio-8082-exec-8] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:31.096 WARN  [http-nio-8082-exec-2] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:31.098 WARN  [http-nio-8082-exec-3] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 10:04:38.444 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 10:04:39.812 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 10:38:36.298 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 10:38:37.691 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 10:49:16.982 WARN  [http-nio-8082-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 11:04:51.854 WARN  [http-nio-8082-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 11:04:51.857 WARN  [http-nio-8082-exec-7] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 11:18:28.487 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 11:18:29.943 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 11:43:26.661 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=21m25s796ms385µs700ns).
+2025-08-23 11:44:02.543 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 11:44:03.856 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 11:50:51.695 WARN  [http-nio-8082-exec-3] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 11:52:16.647 WARN  [http-nio-8082-exec-8] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 11:52:16.649 WARN  [http-nio-8082-exec-9] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 12:03:27.432 WARN  [http-nio-8082-exec-4] o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 12899, SQLState: 72000
+2025-08-23 12:03:46.427 WARN  [http-nio-8082-exec-2] o.h.e.jdbc.spi.SqlExceptionHelper - SQL Error: 12899, SQLState: 72000
+2025-08-23 12:05:44.984 WARN  [http-nio-8082-exec-8] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 12:51:46.968 WARN  [http-nio-8082-exec-9] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 12:57:10.060 WARN  [http-nio-8082-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 12:57:10.062 WARN  [http-nio-8082-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String

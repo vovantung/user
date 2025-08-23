@@ -1,0 +1,6 @@
+2025-08-23 12:03:27.432 ERROR [http-nio-8082-exec-4] o.h.e.jdbc.spi.SqlExceptionHelper - ORA-12899: value too large for column "TXU"."WEEKLY_REPORT"."FILENAME" (actual: 108, maximum: 100)
+
+https://docs.oracle.com/error-help/db/ora-12899/
+2025-08-23 12:03:46.427 ERROR [http-nio-8082-exec-2] o.h.e.jdbc.spi.SqlExceptionHelper - ORA-12899: value too large for column "TXU"."WEEKLY_REPORT"."FILENAME" (actual: 108, maximum: 100)
+
+https://docs.oracle.com/error-help/db/ora-12899/
