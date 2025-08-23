@@ -16,10 +16,7 @@ import txu.user.mainapp.entity.DepartmentEntity;
 import txu.user.mainapp.entity.WeeklyReportEntity;
 import txu.user.mainapp.security.CustomUserDetails;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
@@ -122,6 +119,8 @@ public class WeeklyReportService {
         return weeklyReportDao.save(weeklyReport);
     }
 
+
+
     public List<WeeklyReportExtends> getDepartmentFromTo(Date from, Date to) {
         // Lấy thông tin người dùng gửi request thông qua token, mà lớp filter đã thực hiện qua lưu vào Security context holder
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -145,13 +144,23 @@ public class WeeklyReportService {
         }
 
         assert department != null;
-        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(from, to,  department.getId());
+
+
+        // TimeZone cho Việt Nam
+        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+
+        // Chuyển Date -> LocalDate theo Zone VN
+        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+
+
+        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
+                Date.from(from_.atStartOfDay(zoneId).toInstant()),
+                Date.from(to_.atStartOfDay(zoneId).toInstant()),
+                department.getId());
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
-
-            // TimeZone cho Việt Nam
-            ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
             // Chuyển Date -> LocalDate theo Zone VN
             LocalDate localDate = weeklyReport.getUploadedAt().toInstant()
@@ -217,13 +226,22 @@ public class WeeklyReportService {
         }
 
         assert department != null;
-        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(from, to,  2L);
+
+
+        // TimeZone cho Việt Nam
+        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+
+        // Chuyển Date -> LocalDate theo Zone VN
+        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+
+        List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
+                Date.from(from_.atStartOfDay(zoneId).toInstant()),
+                Date.from(to_.atStartOfDay(zoneId).toInstant()),
+                2L);
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
-
-            // TimeZone cho Việt Nam
-            ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
             // Chuyển Date -> LocalDate theo Zone VN
             LocalDate localDate = weeklyReport.getUploadedAt().toInstant()

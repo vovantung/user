@@ -43,3 +43,14 @@
 2025-08-23 12:51:46.968 WARN  [http-nio-8082-exec-9] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
 2025-08-23 12:57:10.060 WARN  [http-nio-8082-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
 2025-08-23 12:57:10.062 WARN  [http-nio-8082-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 14:27:11.168 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 14:27:12.827 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 14:29:06.221 WARN  [http-nio-8080-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 14:29:06.221 WARN  [http-nio-8080-exec-2] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 14:37:51.533 WARN  [http-nio-8080-exec-2] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 14:37:51.535 WARN  [http-nio-8080-exec-4] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 15:09:55.623 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m43s492ms150µs200ns).
+2025-08-23 16:02:48.680 WARN  [main] org.hibernate.orm.deprecation - HHH90000025: OracleDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-23 16:02:50.251 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-23 16:03:32.572 WARN  [http-nio-8080-exec-1] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
+2025-08-23 16:03:32.572 WARN  [http-nio-8080-exec-3] t.u.m.security.JwtRequestFilter - JWT Token does not begin with Bearer String
