@@ -6,5 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DtoTest {
-    String test;
+    String date;
+    String localDate;
+    String date_;
 }
