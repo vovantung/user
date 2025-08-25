@@ -11,6 +11,7 @@ import java.util.TimeZone;
 public class MainAppApplication {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        // Đặt TimeZone mặc định cho ứng dụng
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
 //        SpringApplication.run(MainAppApplication.class, args);
         GrpcServer.start(MainAppApplication.class, HrmGrpcService.class);
