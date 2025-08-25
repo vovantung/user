@@ -39,14 +39,14 @@ public class TestApi {
         LocalDate startOfWeek = l.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         LocalDate endOfWeek = l.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-        test.setStart(startOfWeek.toString());
-        test.setEnd(endOfWeek.toString());
+
 
         // Nếu bạn muốn trả lại kiểu java.util.Date:
         Date startDate = Date.from(startOfWeek.atStartOfDay(zoneId).toInstant());
         Date endDate = Date.from(endOfWeek.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
-
+        test.setStart(startDate.toString());
+        test.setEnd(endDate.toString());
 
 //        // Lấy ngày đầu tuần (Thứ 2) và cuối tuần (Chủ Nhật)
 //        LocalDate startOfWeek = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
