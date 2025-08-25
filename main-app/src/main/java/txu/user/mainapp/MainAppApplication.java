@@ -5,11 +5,13 @@ import txu.common.grpc.GrpcServer;
 import txu.user.mainapp.grpc.HrmGrpcService;
 
 import java.io.IOException;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class MainAppApplication {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
 //        SpringApplication.run(MainAppApplication.class, args);
         GrpcServer.start(MainAppApplication.class, HrmGrpcService.class);
     }
