@@ -156,26 +156,28 @@ public class WeeklyReportService {
 //                department.getId());
 
 
-        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
-
-        // Chuyển Date -> LocalDate theo Zone VN
-        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
-        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
-
-        // from = 00:00:00
-        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
-
-        // to = 23:59:59.999
-        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
+//        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+//
+//        // Chuyển Date -> LocalDate theo Zone VN
+//        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+//        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+//
+//        // from = 00:00:00
+//        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
+//
+//        // to = 23:59:59.999
+//        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
         List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
-                fromDate,
-                toDate,
+                from,
+                to,
                 department.getId());
 
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
+
+                    ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
             // Chuyển Date -> LocalDate theo Zone VN
             LocalDate localDate = weeklyReport.getUploadedAt().toInstant()
@@ -256,25 +258,27 @@ public class WeeklyReportService {
 //                2L);
 
 
-        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
-
-        // Chuyển Date -> LocalDate theo Zone VN
-        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
-        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
-
-        // from = 00:00:00
-        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
-
-        // to = 23:59:59.999
-        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
+//        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+//
+//        // Chuyển Date -> LocalDate theo Zone VN
+//        LocalDate from_ = from.toInstant().atZone(zoneId).toLocalDate();
+//        LocalDate to_ = to.toInstant().atZone(zoneId).toLocalDate();
+//
+//        // from = 00:00:00
+//        Date fromDate = Date.from(from_.atStartOfDay(zoneId).toInstant());
+//
+//        // to = 23:59:59.999
+//        Date toDate = Date.from(to_.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
         List<WeeklyReportEntity> list = weeklyReportDao.getByDepartmentIdFromTo(
-                fromDate,
-                toDate,
+                from,
+                to,
                 2L);
 
         List<WeeklyReportExtends> results = new ArrayList<>();
         list.forEach(weeklyReport -> {
+
+            ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
             // Chuyển Date -> LocalDate theo Zone VN
             LocalDate localDate = weeklyReport.getUploadedAt().toInstant()

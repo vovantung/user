@@ -3,9 +3,11 @@ package txu.user.mainapp.api;
 import org.springframework.web.bind.annotation.*;
 import txu.user.mainapp.dao.DtoTest;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 
 @CrossOrigin(origins = "*", allowCredentials = "false", maxAge = 86400, allowedHeaders = "*")
@@ -17,21 +19,32 @@ public class TestApi {
         DtoTest test = new DtoTest();
 
 
-
         // Ví dụ: một ngày java.util.Date
         Date date = new Date(); // ngày hiện tại
 
         // TimeZone cho Việt Nam
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
 
+
         // Chuyển Date -> LocalDate theo Zone VN
-        LocalDate localDate = date.toInstant()
+        LocalDate l = date.toInstant()
                 .atZone(zoneId)
                 .toLocalDate();
 
         test.setDate(date.toString());
-        test.setLocalDate(localDate.toString());
-        test.setDate_(Date.from(localDate.atStartOfDay(zoneId).toInstant()).toString());
+        test.setLocalDate(l.toString());
+//        test.setDate_(Date.from(l.atStartOfDay(zoneId).toInstant()).toString());
+
+        // Lấy ngày đầu tuần (Thứ 2) và cuối tuần (Chủ Nhật)
+        LocalDate startOfWeek = l.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate endOfWeek = l.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        test.setStart(startOfWeek.toString());
+        test.setEnd(endOfWeek.toString());
+
+        // Nếu bạn muốn trả lại kiểu java.util.Date:
+        Date startDate = Date.from(startOfWeek.atStartOfDay(zoneId).toInstant());
+        Date endDate = Date.from(endOfWeek.atTime(LocalTime.MAX).atZone(zoneId).toInstant());
 
 
 

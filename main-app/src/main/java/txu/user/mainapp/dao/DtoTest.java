@@ -9,4 +9,6 @@ public class DtoTest {
     String date;
     String localDate;
     String date_;
+    String start;
+    String end;
 }
