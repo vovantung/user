@@ -123,12 +123,6 @@ pipeline {
             echo ">>> Checking changelog files"
             ls -la db/changelog || true
 
-            liquibase \
-              --url=${DB_URL} \
-              --username=${DB_USERNAME} \
-              --password=${DB_PASSWORD} \
-              --changeLogFile=db/changelog/changelog-master.xml \
-              update
           """
         }
       }
