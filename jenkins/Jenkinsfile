@@ -52,6 +52,13 @@ pipeline {
                   secretKeyRef:
                     name: aws-creds-kaniko
                     key: AWS_REGION
+          - name: liquibase
+            image: liquibase/liquibase:4.29.2
+            command: ['cat']
+            tty: true
+            volumeMounts:
+              - name: workspace-volume
+                mountPath: /workspace
           volumes:
             - name: workspace-volume
               emptyDir: {}
@@ -62,6 +69,10 @@ pipeline {
   environment {
     AWS_REGION = "ap-southeast-1"
     ECR_REGISTRY = "211125364313.dkr.ecr.ap-southeast-1.amazonaws.com"
+    # DB thông tin kết nối
+    DB_URL = "jdbc:oracle:thin:@192.168.98.145:1521/pdb_user"
+    DB_USERNAME = "txu"
+    DB_PASSWORD = "root"
   }
 
   stages {
@@ -100,6 +111,22 @@ pipeline {
         }
       }
     }
+
+    stage('Database Migration') {
+      steps {
+        container('liquibase') {
+          sh """
+            cd /workspace
+            liquibase \
+              --url=${DB_URL} \
+              --username=${DB_USERNAME} \
+              --password=${DB_PASSWORD} \
+              --changeLogFile=db/changelog/changelog-master.xml \
+              update
+          """
+          }
+        }
+      }
 
     stage('Kaniko build, push image to ecr') {
       steps {
