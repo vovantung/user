@@ -53,7 +53,7 @@ pipeline {
                     name: aws-creds-kaniko
                     key: AWS_REGION
           - name: liquibase
-            image: liquibase/liquibase:4.29.2
+            image: vothinhuydt/liquibase-oracle:1.0
             command: ['cat']
             tty: true
             volumeMounts:
@@ -119,6 +119,10 @@ pipeline {
         container('liquibase') {
           sh """
             cd /workspace
+            echo ">>> Running Liquibase migration"
+            echo ">>> Checking changelog files"
+            ls -la db/changelog || true
+
             liquibase \
               --url=${DB_URL} \
               --username=${DB_USERNAME} \
@@ -126,9 +130,9 @@ pipeline {
               --changeLogFile=db/changelog/changelog-master.xml \
               update
           """
-          }
         }
       }
+    }
 
     stage('Kaniko build, push image to ecr') {
       steps {
