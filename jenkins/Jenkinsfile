@@ -122,12 +122,6 @@ pipeline {
             echo ">>> Running Liquibase migration"
             echo ">>> Checking changelog files"
             ls -la db/changelog || true
-            echo ">>> DEBUG: running in $(hostname)"
-            echo ">>> PATH=$PATH"
-            echo ">>> which sh: $(which sh || true)"
-            echo ">>> liq: $(which liquibase || true)"
-            ls -la /liquibase || true
-            echo ">>> Running liquibase..."
 
             liquibase \
               --url=${DB_URL} \
