@@ -53,7 +53,7 @@ pipeline {
                     name: aws-creds-kaniko
                     key: AWS_REGION
           - name: liquibase
-            image: vothinhuydt/liquibase-oracle:1.6
+            image: vothinhuydt/liquibase-oracle:1.9
             command: ['cat']
             tty: true
             volumeMounts:
@@ -118,7 +118,7 @@ pipeline {
       steps {
         container('liquibase') {
           sh """
-            echo ">>> Running Liquibase migration"
+            echo ">>> Hello word"
           """
         }
       }
