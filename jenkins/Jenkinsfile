@@ -118,7 +118,17 @@ pipeline {
       steps {
         container('liquibase') {
           sh """
-            echo ">>> Hello word"
+            cd /workspace
+            echo ">>> Running Liquibase migration"
+            echo ">>> Checking changelog files"
+            ls -la db/changelog || true
+
+            liquibase \
+              --url=${DB_URL} \
+              --username=${DB_USERNAME} \
+              --password=${DB_PASSWORD} \
+              --changeLogFile=db/changelog/changelog-master.xml \
+              update
           """
         }
       }
