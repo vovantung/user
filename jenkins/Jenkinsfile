@@ -53,7 +53,7 @@ pipeline {
                     name: aws-creds-kaniko
                     key: AWS_REGION
           - name: liquibase
-            image: vothinhuydt/liquibase-oracle:1.5
+            image: vothinhuydt/liquibase-oracle:1.6
             command: ['cat']
             tty: true
             volumeMounts:
