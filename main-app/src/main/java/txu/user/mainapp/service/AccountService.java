@@ -1,7 +1,5 @@
 package txu.user.mainapp.service;
 
-import io.minio.*;
-import io.minio.errors.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -10,7 +8,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import txu.user.mainapp.dao.AccountDao;
 import txu.user.mainapp.dao.DepartmentDao;
 import txu.user.mainapp.dao.RoleDao;
@@ -19,12 +16,6 @@ import txu.common.exception.BadParameterException;
 import txu.common.exception.ConflictException;
 import txu.common.exception.NotFoundException;
 import txu.common.exception.TxException;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
-
-
 
 @Slf4j
 @Service
@@ -34,12 +25,12 @@ public class AccountService {
     private final AccountDao accountDao;
     private final DepartmentDao departmentDao;
     private final RoleDao roleDao;
-    private final MinioClient minioClient;
+//    private final MinioClient minioClient;
 
-    @Value("${minio.bucket}")
+    @Value("${ceph.rgw.bucket}")
     private String bucketName;
 
-    @Value("${minio.url}")
+    @Value("${ceph.rgw.endpoint}")
     private String url;
 
     @Transactional
@@ -155,83 +146,83 @@ public class AccountService {
     }
 
 
-    @Transactional
-    public AccountEntity updateAvatar(
-            MultipartFile file,
-            String username,
-            String password,
-            String firstName,
-            String lastName,
-            String email,
-            String phoneNumber
-    ) throws ServerException, InsufficientDataException, ErrorResponseException, IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException {
-
-        AccountEntity account = getByUsername(username);
-        AccountEntity accountToUpdate = new AccountEntity();
-
-        if (file != null && !file.isEmpty()) {
-            // Xóa avatar hiện tại của account
-            try {
-                minioClient.removeObject(
-                        RemoveObjectArgs.builder()
-                                .bucket(bucketName)
-                                .object(account.getAvatarFilename())
-                                .build()
-                );
-                System.out.println("Deleted successfully: " + account.getAvatarFilename());
-            } catch (Exception e) {
-                System.err.println("Error deleting file: " + e.getMessage());
-            }
-
-            String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-            String fileUrl = String.format(url + "/%s/%s", bucketName, filename);
-            accountToUpdate.setAvatarUrl(fileUrl);
-            accountToUpdate.setAvatarFilename(filename);
-
-            // Ensure bucket exists
-            boolean found;
-            try {
-                found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            if (!found) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-            }
-
-            // Tạo file avatar mới
-            minioClient.putObject(
-                    PutObjectArgs.builder()
-                            .bucket(bucketName)
-                            .object(filename)
-                            .stream(file.getInputStream(), file.getSize(), -1)
-                            .contentType(file.getContentType())
-                            .build()
-            );
-        }
-
-        // Chỉ cập nhật password, firstName, lastName, email, phoneNumber; avatarUrl, avataFilename nếu tồn tại file avatar
-
-        if (password != null && !password.isEmpty()) {
-            accountToUpdate.setPassword(password);
-        }
-        accountToUpdate.setId(account.getId());
-        if (lastName != null && !lastName.isEmpty()) {
-            accountToUpdate.setLastName(lastName);
-        }
-        if (firstName != null && !firstName.isEmpty()) {
-            accountToUpdate.setFirstName(firstName);
-        }
-        if (email != null && !email.isEmpty()) {
-            accountToUpdate.setEmail(email);
-        }
-        if (phoneNumber != null && !phoneNumber.isEmpty()) {
-            accountToUpdate.setPhoneNumber(phoneNumber);
-        }
-
-        return createOrUpdate(accountToUpdate);
-
-    }
+//    @Transactional
+//    public AccountEntity updateAvatar(
+//            MultipartFile file,
+//            String username,
+//            String password,
+//            String firstName,
+//            String lastName,
+//            String email,
+//            String phoneNumber
+//    ) throws  IOException, NoSuchAlgorithmException, InvalidKeyException{
+//
+//        AccountEntity account = getByUsername(username);
+//        AccountEntity accountToUpdate = new AccountEntity();
+//
+//        if (file != null && !file.isEmpty()) {
+//            // Xóa avatar hiện tại của account
+//            try {
+//                minioClient.removeObject(
+//                        RemoveObjectArgs.builder()
+//                                .bucket(bucketName)
+//                                .object(account.getAvatarFilename())
+//                                .build()
+//                );
+//                System.out.println("Deleted successfully: " + account.getAvatarFilename());
+//            } catch (Exception e) {
+//                System.err.println("Error deleting file: " + e.getMessage());
+//            }
+//
+//            String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+//            String fileUrl = String.format(url + "/%s/%s", bucketName, filename);
+//            accountToUpdate.setAvatarUrl(fileUrl);
+//            accountToUpdate.setAvatarFilename(filename);
+//
+//            // Ensure bucket exists
+//            boolean found;
+//            try {
+//                found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//            if (!found) {
+//                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+//            }
+//
+//            // Tạo file avatar mới
+//            minioClient.putObject(
+//                    PutObjectArgs.builder()
+//                            .bucket(bucketName)
+//                            .object(filename)
+//                            .stream(file.getInputStream(), file.getSize(), -1)
+//                            .contentType(file.getContentType())
+//                            .build()
+//            );
+//        }
+//
+//        // Chỉ cập nhật password, firstName, lastName, email, phoneNumber; avatarUrl, avataFilename nếu tồn tại file avatar
+//
+//        if (password != null && !password.isEmpty()) {
+//            accountToUpdate.setPassword(password);
+//        }
+//        accountToUpdate.setId(account.getId());
+//        if (lastName != null && !lastName.isEmpty()) {
+//            accountToUpdate.setLastName(lastName);
+//        }
+//        if (firstName != null && !firstName.isEmpty()) {
+//            accountToUpdate.setFirstName(firstName);
+//        }
+//        if (email != null && !email.isEmpty()) {
+//            accountToUpdate.setEmail(email);
+//        }
+//        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+//            accountToUpdate.setPhoneNumber(phoneNumber);
+//        }
+//
+//        return createOrUpdate(accountToUpdate);
+//
+//    }
 
     //    @Transactional
     public AccountEntity getByUsername(String username) {
