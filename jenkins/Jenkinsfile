@@ -72,7 +72,7 @@ pipeline {
     /*
      DB thông tin kết nối
     */
-    DB_URL = "jdbc:oracle:thin:@192.168.98.145:1521/orclpdb"
+    DB_URL = "jdbc:oracle:thin:@rac-cluster-scan.txuyen.local:1521/pdb.txuyen.local"
     DB_USERNAME = "txu"
     DB_PASSWORD = "root"
   }
