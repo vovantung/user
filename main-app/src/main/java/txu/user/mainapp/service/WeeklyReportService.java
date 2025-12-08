@@ -305,6 +305,7 @@ public class WeeklyReportService {
                 temp.setOriginNameReportEx(rs.getOriginName());
                 temp.setDateReportEx(rs.getUploadedAt());
                 temp.setUrlReportEx(rs.getUrl());
+                temp.setFilenameReportEx(rs.getFilename());
             }
             results.add(temp);
         });
@@ -371,6 +372,7 @@ public class WeeklyReportService {
                 temp.setOriginNameReportEx(rs.getOriginName());
                 temp.setDateReportEx(rs.getUploadedAt());
                 temp.setUrlReportEx(rs.getUrl());
+                temp.setFilenameReportEx(rs.getFilename());
             }
             results.add(temp);
         });

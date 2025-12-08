@@ -11,5 +11,6 @@ import java.util.Date;
 public class WeeklyReportExtends extends WeeklyReportEntity {
     String urlReportEx;
     String originNameReportEx;
+    String filenameReportEx;
     Date dateReportEx;
 }
