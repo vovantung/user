@@ -13,7 +13,7 @@ import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import java.net.URI;
 
 @Configuration
-public class MinioConfig {
+public class CephRGWConfig {
 
     @Value("${ceph.rgw.access-key}")
     private String accessKey;
