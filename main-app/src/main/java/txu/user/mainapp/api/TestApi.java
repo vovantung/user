@@ -9,12 +9,16 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.annotation.KafkaListener;
 
 @CrossOrigin(origins = "*", allowCredentials = "false", maxAge = 86400, allowedHeaders = "*")
 @RestController
 public class TestApi {
-    @PostMapping(value = "/test")
-    public DtoTest test() {
+
+
+    @PostMapping(value = "/test1")
+    public DtoTest test1() {
 //        throw new TxException("test");
         DtoTest test = new DtoTest();
 

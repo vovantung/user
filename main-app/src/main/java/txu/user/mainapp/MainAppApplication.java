@@ -1,6 +1,7 @@
 package txu.user.mainapp;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import txu.common.grpc.GrpcServer;
 import txu.user.mainapp.grpc.HrmGrpcService;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.TimeZone;
 
 @SpringBootApplication
+@EnableCaching
 public class MainAppApplication {
 
     public static void main(String[] args) throws IOException, InterruptedException {
