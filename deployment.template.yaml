@@ -21,18 +21,12 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:
-            - name: KAFKA_USER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: kafka-user1
-                  key: user.password
           volumeMounts:
             - name: backend-logs
               mountPath: /logs
-            - name: kafka-tls
-              mountPath: /etc/kafka/tls
-              readOnly: true
+#            - name: kafka-tls
+#              mountPath: /etc/kafka/tls
+#              readOnly: true
             - name: kafka-ca
               mountPath: /etc/kafka/ca
               readOnly: true
@@ -45,9 +39,9 @@ spec:
         - name: backend-logs
           persistentVolumeClaim:
             claimName: pvc-backend-logs
-        - name: kafka-tls
-          secret:
-            secretName: kafka-user1
+#        - name: kafka-tls
+#          secret:
+#            secretName: kafka-user1
         - name: kafka-ca
           secret:
             secretName: kafka-cluster-ca
