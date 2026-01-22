@@ -13,6 +13,7 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.annotation.KafkaListener;
 
 @CrossOrigin(origins = "*", allowCredentials = "false", maxAge = 86400, allowedHeaders = "*")
+@RequestMapping("/user")
 @RestController
 public class TestApi {
 
@@ -80,5 +81,10 @@ public class TestApi {
 
 
         return test;
+    }
+
+    @GetMapping(value = "/test")
+    public String test() {
+        return "Vo Thi Ngoc Uyen";
     }
 }
